@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            background:url('https://birthinternational.com/wp-content/uploads/2022/03/MW395-Sling-for-Hanging-Scales-BlueGrey-Sleepy-Moons.jpg');
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+
+        #converter {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 40px;
+            border: 1px solid lightslategray;
+            border-radius: 5px;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div id="converter">
+    <h1>Temperature Converter</h1>
+    <label for="temperature">Enter Temperature:</label>
+    <input type="number" id="temperature" placeholder="Enter temperature" required>
+
+    <label for="unit">Select Unit:</label>
+    <select id="unit">
+        <option value="Celsius">Celsius</option>
+        <option value="Fahrenheit">Fahrenheit</option>
+        <option value="Kelvin">Kelvin</option>
+    </select>
+
+    <button onclick="convertTemperature()">Convert</button>
+
+    <p id="result">Converted Temperature: </p>
+</div>
+
+<script>
+    function convertTemperature() {
+        try {
+            // Get user input
+            let temperature = parseFloat(document.getElementById('temperature').value);
+            let unit = document.getElementById('unit').value;
+
+            // Perform conversion
+            let convertedTemperature;
+            let resultUnit;
+            switch (unit) {
+                case 'Celsius':
+                    convertedTemperature = (temperature - 32) * 5 / 9;
+                    resultUnit = 'Celsius';
+                    break;
+                case 'Fahrenheit':
+                    convertedTemperature = (temperature * 9 / 5) + 32;
+                    resultUnit = 'Fahrenheit';
+                    break;
+                case 'Kelvin':
+                    convertedTemperature = temperature + 273.15;
+                    resultUnit = 'Kelvin';
+                    break;
+                default:
+                    throw new Error('Invalid unit');
+            }
+
+            // Display the result
+            document.getElementById('result').textContent = 'Converted Temperature: ' + convertedTemperature.toFixed(2) + ' ' + resultUnit;
+        } catch (error) {
+            alert('Error: ' + error.message);
+        }
+    }
+</script>
+
+</body>
+</html>
